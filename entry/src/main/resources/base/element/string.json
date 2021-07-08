@@ -1,0 +1,40 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "stripedprocessbtn"
+    },
+    {
+      "name": "mainability_description",
+      "value": "Java_Phone_Empty Feature Ability"
+    },
+    {
+      "name": "mainability_HelloWorld",
+      "value": "Hello World"
+    },
+    {
+      "name": "StartProcess",
+      "value": "Start process"
+    },
+    {
+      "name": "stop",
+      "value": "Stop"
+    },
+    {
+      "name": "Process3",
+      "value": "Process 3"
+    },
+    {
+      "name": "Process2",
+      "value": "Click"
+    },
+    {
+      "name": "Process4",
+      "value": "Process 4"
+    },
+    {
+      "name": "SansSerif",
+      "value": "sans-serif"
+    }
+  ]
+}

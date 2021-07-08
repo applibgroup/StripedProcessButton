@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DirectionalLayout
+    xmlns:ohos="http://schemas.huawei.com/res/ohos"
+    ohos:height="match_parent"
+    ohos:width="match_parent"
+    xmlns:app="http://schemas.huawei.com/res/app"
+    ohos:orientation="vertical"
+    >
+
+    <Text
+        ohos:width="match_parent"
+        ohos:height="match_content"
+        ohos:top_margin="15fp"
+        ohos:text="$string:app_name"
+        ohos:text_alignment="center"
+        ohos:text_size="25fp"
+        ohos:text_weight="700"
+        />
+
+    <com.github.nikartm.support.StripedProcessButton
+        ohos:id="$+id:btn_start"
+        ohos:left_margin="16fp"
+        ohos:right_margin="16fp"
+        ohos:width="match_parent"
+        ohos:height="60fp"
+        ohos:layout_alignment="center"
+        ohos:top_margin="40fp"
+        ohos:text_size="20fp"
+        ohos:text="$string:StartProcess"
+        ohos:text_font="$string:SansSerif"
+        ohos:text_weight="700"
+        app:spb_showStripes="false"
+        app:spb_loadingText="Buffer..."
+        app:spb_cornerRadius="25"
+        ohos:clickable="true"
+        ohos:focusable="focus_enable"
+        ohos:text_color="#FFF1F1F0"
+        />
+
+    <Button
+        ohos:id="$+id:btn_stop"
+        ohos:width="100fp"
+        ohos:height="45fp"
+        ohos:text_weight="400"
+        ohos:left_margin="16fp"
+        ohos:top_margin="40fp"
+        ohos:text_size="20fp"
+        ohos:background_element="$graphic:back"
+        ohos:clickable="true"
+        ohos:text="$string:stop"
+        />
+
+    <com.github.nikartm.support.StripedProcessButton
+        ohos:id="$+id:btn_3"
+        ohos:width="150fp"
+        ohos:height="150fp"
+        ohos:top_margin="40fp"
+        app:spb_stripeGradient="false"
+        ohos:left_margin="16fp"
+        ohos:text="$string:Process3"
+        app:spb_showStripes="true"
+        ohos:clickable="true"
+        ohos:text_size="20fp"
+        ohos:text_weight="400"
+        ohos:focusable="focus_enable"
+        ohos:text_color="#FFF8F6F6"
+        app:spb_stripeRevert="true"
+        app:spb_background="#6D4C41"
+        app:spb_mainStripColor="#6D4C41"
+        app:spb_subStripeColor="#FF9800"
+        app:spb_stripeTilt="15"
+        app:spb_stripeAlpha="0.8"
+        app:spb_loadingText="Loading..."
+        app:spb_cornerRadius="270" />
+
+
+
+    <com.github.nikartm.support.StripedProcessButton
+        ohos:width="match_parent"
+        ohos:height="70fp"
+        ohos:top_margin="40fp"
+        app:spb_showStripes="false"
+        ohos:left_margin="16fp"
+        ohos:right_margin="16fp"
+        ohos:text_weight="700"
+        ohos:text="$string:Process2"
+        ohos:clickable="true"
+        ohos:focusable="focus_enable"
+        ohos:text_size="20fp"
+        ohos:text_color="#FFFFF2F2"
+        ohos:id="$+id:btn_2"
+        app:spb_background="#283593"
+        app:spb_mainStripColor="#283593"
+        app:spb_subStripeColor="#6495ED"
+        app:spb_stripeAlpha="0.5"
+        app:spb_loadingText="Loading..."
+        app:spb_cornerRadius="60"
+        app:spb_stripeTilt="0"
+        app:spb_stripeWidth="20"
+         />
+
+    <com.github.nikartm.support.StripedProcessButton
+        ohos:width="match_parent"
+        ohos:height="60fp"
+        ohos:top_margin="40fp"
+        app:spb_showStripes="true"
+        ohos:clickable="true"
+        ohos:focusable="focus_enable"
+        ohos:text_color="#FFFFFCFC"
+        ohos:text_weight="700"
+        ohos:id="$+id:btn_4"
+        ohos:text="$string:Process4"
+        ohos:text_size="20fp"
+        ohos:left_margin="16fp"
+        ohos:right_margin="16fp"
+        app:spb_loadingText="Loading..."
+        app:spb_stripeGradient="false"
+        app:spb_stripeWidth="60"
+        app:spb_stripeTilt="20"
+        app:spb_background="#383838"
+        app:spb_mainStripColor="#A9A9A9"
+        app:spb_subStripeColor="#484848"
+        app:spb_stripeDuration="120"
+        app:spb_cornerRadius="15"
+        />
+</DirectionalLayout>
