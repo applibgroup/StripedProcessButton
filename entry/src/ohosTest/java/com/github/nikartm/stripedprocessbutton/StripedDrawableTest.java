@@ -21,7 +21,6 @@ import ohos.agp.utils.Color;
 import com.github.nikartm.support.StripedDrawable;
 import org.junit.Test;
 
-
 public class StripedDrawableTest {
     @Test
     public void setStripeWidth() {

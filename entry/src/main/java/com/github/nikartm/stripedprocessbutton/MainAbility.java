@@ -1,9 +1,12 @@
 package com.github.nikartm.stripedprocessbutton;
 
-import com.github.nikartm.stripedprocessbutton.slice.MainAbilitySlice;
 import ohos.aafwk.ability.Ability;
 import ohos.aafwk.content.Intent;
+import com.github.nikartm.stripedprocessbutton.slice.MainAbilitySlice;
 
+/**
+ * MainAbility Class.
+ */
 public class MainAbility extends Ability {
     @Override
     public void onStart(Intent intent) {

@@ -73,8 +73,6 @@
         app:spb_loadingText="Loading..."
         app:spb_cornerRadius="270" />
 
-
-
     <com.github.nikartm.support.StripedProcessButton
         ohos:width="match_parent"
         ohos:height="70fp"

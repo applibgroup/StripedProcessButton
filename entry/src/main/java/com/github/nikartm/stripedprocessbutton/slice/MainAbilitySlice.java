@@ -1,11 +1,14 @@
 package com.github.nikartm.stripedprocessbutton.slice;
 
-import com.github.nikartm.stripedprocessbutton.ResourceTable;
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
+import com.github.nikartm.stripedprocessbutton.ResourceTable;
 import com.github.nikartm.support.StripedProcessButton;
 
+/**
+ * MainAbilitySlice.
+ */
 public class MainAbilitySlice extends AbilitySlice {
     private StripedProcessButton stripedButton;
     private Button btnStop;
