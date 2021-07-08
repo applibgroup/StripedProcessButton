@@ -1,177 +1,197 @@
 package com.github.nikartm.support;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ValueAnimator;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.Drawable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import ohos.agp.animation.Animator;
+import ohos.agp.animation.AnimatorValue;
+import ohos.agp.components.Component;
+import ohos.agp.components.element.Element;
+import ohos.agp.components.element.ShapeElement;
+import ohos.agp.render.Canvas;
+import ohos.agp.render.LinearShader;
+import ohos.agp.render.Paint;
+import ohos.agp.render.Shader;
+import ohos.agp.utils.Color;
+import ohos.agp.utils.Point;
+import ohos.agp.utils.Rect;
+import ohos.agp.utils.RectFloat;
+import ohos.agp.utils.TextAlignment;
 
 /**
- * Animated striped drawable
- * @author Ivan V on 30.03.2018.
- * @version 1.0
+ * AnimatedStripedDrawable Class.
  */
-public class AnimatedStripedDrawable extends Drawable {
-
-    private int viewHeight;
-    private int viewWidth;
-    private float tiltLeft = 0f;
-    private float tiltRight = 0f;
-    private boolean running = false;
-
-    private StripedDrawable drawable;
-    private ValueAnimator animator;
-    private Shader stripesShader;
+public class AnimatedStripedDrawable extends ShapeElement implements Element.OnChangeListener {
+    private int mViewHeight;
+    private int mViewWidth;
+    private float mTiltLeft = 0f;
+    private float mTiltRight = 0f;
+    private boolean mRunning = false;
+    private StripedDrawable mDrawable;
+    private AnimatorValue mAnimator;
+    private Shader mStripesShader;
+    private Component mComponent;
 
     public AnimatedStripedDrawable(StripedDrawable drawable) {
-        this.drawable = drawable;
+        this.mDrawable = drawable;
+        setCallback(this);
     }
 
     @Override
-    protected void onBoundsChange(Rect bounds) {
-        super.onBoundsChange(bounds);
-        viewHeight = bounds.height();
-        viewWidth = bounds.width();
+    public void onChange(Element element) {
+        mViewHeight = mComponent.getEstimatedHeight();
+        mViewWidth = mComponent.getEstimatedWidth();
         adjustStripes();
     }
 
     private void adjustStripes() {
-        if (!drawable.isStripeRevert()) {
-            tiltLeft = drawable.getTilt();
-            tiltRight = 0;
+        if (!mDrawable.isStripeRevert()) {
+            mTiltLeft = mDrawable.getTilt();
+            mTiltRight = 0;
         } else {
-            tiltRight = drawable.getTilt();
-            tiltLeft = 0;
+            mTiltRight = mDrawable.getTilt();
+            mTiltLeft = 0;
         }
     }
 
     private void initAnimator() {
-        if (animator == null) {
-            animator = ValueAnimator.ofInt(0, 1);
-            animator.setRepeatCount(ValueAnimator.INFINITE);
-            animator.setDuration(drawable.getStripeDuration());
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-                    shiftColor(drawable.getColorMain(), drawable.getColorSub());
-                    invalidateSelf();
-                }
+        if (mAnimator == null) {
+            mAnimator = new AnimatorValue();
+            mAnimator.setCurveType(Animator.CurveType.LINEAR);
+            mAnimator.setDuration(mDrawable.getStripeDuration());
+            mAnimator.setLoopedCount(-1);
+            mAnimator.setLoopedListener(animator -> {
+                shiftColor(mDrawable.getColorMain(), mDrawable.getColorSub());
+                invalidateSelf();
             });
         }
     }
 
     @Override
-    public int getIntrinsicWidth() {
-        return viewWidth > 0 ? viewWidth : super.getIntrinsicWidth();
+    public int getWidth() {
+        return mViewWidth > 0 ? mViewWidth : super.getWidth();
     }
 
     @Override
-    public int getIntrinsicHeight() {
-        return viewHeight > 0 ? viewHeight : super.getIntrinsicHeight();
+    public int getHeight() {
+        return mViewHeight > 0 ? mViewHeight : super.getHeight();
     }
 
     @Override
-    public void setAlpha(int alpha) {}
-
-    @Override
-    public void setColorFilter(@Nullable ColorFilter colorFilter) {}
-
-    @Override
-    public int getOpacity() {
-        return PixelFormat.TRANSLUCENT;
-    }
-
-    @Override
-    public void draw(@NonNull Canvas canvas) {
+    public void drawToCanvas(Canvas canvas) {
+        super.drawToCanvas(canvas);
         drawStripes(canvas);
         startStripesAnimation();
     }
 
     private void startStripesAnimation() {
-        if (running) {
+        if (mRunning) {
             start();
         } else {
-            drawable.setShowStripes(false);
+            mDrawable.setShowStripes(false);
         }
     }
 
     private void drawStripes(Canvas canvas) {
-        final Paint paintBack = new Paint(Paint.ANTI_ALIAS_FLAG);
-        final Paint paintStripes = new Paint(Paint.ANTI_ALIAS_FLAG);
-        final Rect rect = new Rect(0, 0, viewWidth, viewHeight);
-        final RectF rectF = new RectF(rect);
-        final int stripesAlpha = Util.computeAlpha(drawable.getStripeAlpha());
-
-        if (drawable.isStripeGradient()) {
-            stripesShader = createGradientShader();
+        final Paint paintBack = new Paint();
+        final Paint paintStripes = new Paint();
+        final Paint textPaint = new Paint();
+        final Rect rect = new Rect(0, 0, mViewWidth, mViewHeight);
+        final RectFloat rectF = new RectFloat(rect);
+        final int stripesAlpha = Util.computeAlpha(mDrawable.getStripeAlpha());
+        paintBack.setAntiAlias(true);
+        paintStripes.setAntiAlias(true);
+        if (mDrawable.isStripeGradient()) {
+            mStripesShader = createGradientShader();
         } else {
-            stripesShader = createShader();
+            mStripesShader = createShader();
         }
-
-        paintBack.setColor(drawable.getColorBack());
-        float cornerRadius = drawable.getCornerRadius();
+        textPaint.setAntiAlias(true);
+        textPaint.setColor(new Color(mDrawable.getTextColor()));
+        textPaint.setTextAlign(TextAlignment.CENTER);
+        textPaint.setTextSize(mDrawable.getTextSize());
+        textPaint.setFont(mDrawable.getFont());
+        paintBack.setColor(new Color(mDrawable.getColorBack()));
+        float cornerRadius = mDrawable.getCornerRadius();
         canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paintBack);
-
-        if (drawable.isShowStripes()) {
+        canvas.drawText(textPaint, mDrawable.getButtonText(),
+                mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
+        if (mDrawable.isShowStripes()) {
             paintStripes.setAlpha(stripesAlpha);
-            paintStripes.setShader(stripesShader);
+            paintStripes.setShader(mStripesShader, Paint.ShaderType.LINEAR_SHADER);
             canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paintStripes);
+            canvas.drawText(textPaint, mDrawable.getLoadingText(),
+                    mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
         }
     }
 
-    @NonNull
-    private LinearGradient createShader() {
-        return new LinearGradient(drawable.getStripeWidth(), tiltLeft, 0, tiltRight,
-                new int[] { drawable.getColorMain(), drawable.getColorSub() }, new float[] { .5f, .5f },
-                Shader.TileMode.REPEAT);
+    private LinearShader createShader() {
+        return new LinearShader(new Point[] {new Point(mDrawable.getStripeWidth(), mTiltLeft),
+                                                new Point(0, mTiltRight)},
+                new float[]{0.5f, 0.5f},
+                new Color[] { new Color(mDrawable.getColorMain()), new Color(mDrawable.getColorSub())},
+                Shader.TileMode.REPEAT_TILEMODE);
     }
 
-    @NonNull
-    private LinearGradient createGradientShader() {
-        return new LinearGradient(drawable.getStripeWidth(), tiltLeft, 0, tiltRight,
-                drawable.getColorMain(), drawable.getColorSub(), Shader.TileMode.REPEAT);
+    private LinearShader createGradientShader() {
+        return new LinearShader(new Point[] {new Point(mDrawable.getStripeWidth(), mTiltLeft),
+                                                new Point(0, mTiltRight)},
+                null,
+                new Color[] { new Color(mDrawable.getColorMain()), new Color(mDrawable.getColorSub())},
+                Shader.TileMode.REPEAT_TILEMODE);
     }
 
     private void shiftColor(int mainColor, int subColor) {
-        drawable.setColorMain(subColor);
-        drawable.setColorSub(mainColor);
+        mDrawable.setColorMain(subColor);
+        mDrawable.setColorSub(mainColor);
     }
 
-    // Start stripes animation
+    /**
+     * Start stripes animation.
+     */
     protected void start() {
         if (isRunning()) {
             return;
         }
-        running = true;
+        mRunning = true;
         initAnimator();
-        animator.start();
-        drawable.setShowStripes(true);
+        mAnimator.start();
+        mDrawable.setShowStripes(true);
         invalidateSelf();
     }
 
-    // Stop stripes animation
+    /**
+     * Stop stripes animation.
+     */
     protected void stop() {
         if (!isRunning()) {
             return;
         }
-        running = false;
-        animator.cancel();
-        drawable.setShowStripes(false);
+        mRunning = false;
+        mAnimator.cancel();
+        mDrawable.setShowStripes(false);
         invalidateSelf();
     }
 
-    // Check if stripes animation running
+    /**
+     * Check if stripes animation running.
+     */
     protected boolean isRunning() {
-        return animator != null && animator.isStarted();
+        return mAnimator != null && mAnimator.isRunning();
     }
 
+    /**
+     * mcomponent is used to get viewHeight and viewWidth in this class.
+     *
+     * @param component is set to mcomponent here.
+     */
+    public void setComponent(Component component) {
+        mComponent = component;
+    }
+
+    /**
+     * Used to check if component is linked or not.
+     */
+    public void invalidateSelf() {
+        if (mComponent != null) {
+            mComponent.invalidate();
+        }
+    }
 }

@@ -1,63 +1,78 @@
 package com.github.nikartm.support;
 
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.drawable.Animatable;
-import androidx.appcompat.widget.AppCompatButton;
-import android.util.AttributeSet;
-
+import static ohos.agp.components.AttrHelper.getDensity;
+import ohos.agp.components.AttrSet;
+import ohos.agp.components.Button;
+import ohos.agp.components.Component;
+import ohos.agp.render.Canvas;
+import ohos.app.Context;
 import com.github.nikartm.support.constant.Constants;
 
 /**
- * Striped process button
- * @author Ivan V on 29.03.2018.
- * @version 1.0
+ * Striped process button.
  */
-public class StripedProcessButton extends AppCompatButton implements Animatable {
-
-    private AnimatedStripedDrawable animatedDrawable;
-    private StripedDrawable stripedDrawable;
-    private State state = State.STOP;
-
-    private long startAnimDuration = Constants.NO_INIT;
-    private long stopAnimDuration = Constants.NO_INIT;
-    private boolean buttonAnimated = Constants.DEF_BUTTON_ANIM;
-    private String defaultText;
-
-    private float density;
+public class StripedProcessButton extends Button implements Component.BindStateChangedListener, Component.DrawTask {
+    private AnimatedStripedDrawable mAnimatedDrawable;
+    private StripedDrawable mStripedDrawable;
+    private State mState = State.STOP;
+    private long mStartAnimDuration = Constants.NO_INIT;
+    private long mStopAnimDuration = Constants.NO_INIT;
+    private boolean mButtonAnimated = Constants.DEF_BUTTON_ANIM;
+    private String mDefaultText;
+    private float mDensity;
 
     public StripedProcessButton(Context context) {
         super(context);
         initAttrs(null);
     }
 
-    public StripedProcessButton(Context context, AttributeSet attrs) {
+    public StripedProcessButton(Context context, AttrSet attrs) {
         super(context, attrs);
         initAttrs(attrs);
     }
 
-    public StripedProcessButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public StripedProcessButton(Context context, AttrSet attrs, String defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initAttrs(attrs);
     }
 
-    private void initAttrs(AttributeSet attrs) {
-        density = getContext().getResources().getDisplayMetrics().density;
-        AttributeController attrController = new AttributeController(getContext(), attrs);
-        stripedDrawable = attrController.getStripedDrawable();
-        animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
+    private void initAttrs(AttrSet attrs) {
+        mDensity = getDensity(getContext());
+        AttributeController attrController = new AttributeController(attrs);
+        mStripedDrawable = attrController.getStripedDrawable();
+        addOhosAttr(mStripedDrawable);
+        mAnimatedDrawable = new AnimatedStripedDrawable(mStripedDrawable);
+        mAnimatedDrawable.setComponent(this);
+        setBindStateChangedListener(this);
+        addDrawTask(this:: onDraw);
+    }
+
+    /**
+     * Store attributes of ohosButton in stripedDrawable.
+     */
+    private void addOhosAttr(StripedDrawable stripedDrawable) {
+        stripedDrawable.setButtonText(getText());
+        stripedDrawable.setTextColor(getTextColor().getValue());
+        stripedDrawable.setTextSize(getTextSize());
+        stripedDrawable.setFont(getFont());
     }
 
     @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        defaultText = getText() != null ? getText().toString() : "";
+    public void onComponentBoundToWindow(Component component) {
+        mDefaultText = getText() != null ? getText() : "test...";
         launchAnimationWithDelay();
     }
 
-    // Launch animation with delay when view attached to window
+    @Override
+    public void onComponentUnboundFromWindow(Component component) {
+        // This method is not required.
+    }
+
+    /**
+     * Launch animation with delay when view attached to window.
+     */
     private void launchAnimationWithDelay() {
-        switch (state) {
+        switch (mState) {
             case START:
                 start();
                 break;
@@ -70,269 +85,287 @@ public class StripedProcessButton extends AppCompatButton implements Animatable 
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        setBackground(animatedDrawable);
+    public void onDraw(Component component, Canvas canvas) {
+        setBackground(mAnimatedDrawable);
         setEnabled(!isRunning());
-        super.onDraw(canvas);
+        mAnimatedDrawable.drawToCanvas(canvas);
     }
 
-    @Override
+    /**
+     * when called, checks state, if Start
+     * then start AnimatedStripedDrawable.
+     */
     public void start() {
-        state = State.START;
-        if (isRunning() || !isAttachedToWindow()) {
+        mState = State.START;
+        if (isRunning() || !isBoundToWindow()) {
             return;
         }
         setEnabled(isRunning());
-        animatedDrawable.start();
+        mAnimatedDrawable.start();
         animateButton(isRunning());
     }
 
-    @Override
+    /**
+     * when called, checks state, if Stop
+     * then stop AnimatedStripedDrawable.
+     */
     public void stop() {
-        state = State.STOP;
-        if (!isRunning() || !isAttachedToWindow()) {
+        mState = State.STOP;
+        if (!isRunning() || !isBoundToWindow()) {
             return;
         }
         setEnabled(isRunning());
-        animatedDrawable.stop();
+        mAnimatedDrawable.stop();
         animateButton(isRunning());
     }
 
-    @Override
+    /**
+     * Check if AnimatedStripeDrawable is running.
+     */
     public boolean isRunning() {
-        return isAttachedToWindow() && animatedDrawable.isRunning();
+        return isBoundToWindow() && mAnimatedDrawable.isRunning();
     }
 
     private void animateButton(boolean start) {
         if (isButtonAnimated()) {
-            long duration;
-            if (start) {
-                duration = startAnimDuration == Constants.NO_INIT
-                        ? Constants.DEF_START_ANIM_DURATION
-                        : startAnimDuration;
-            } else {
-                duration = stopAnimDuration == Constants.NO_INIT
-                        ? Constants.DEF_STOP_ANIM_DURATION
-                        : stopAnimDuration;
-            }
             setCurrentText(start);
-            Util.Animation.animateView(this, start, duration);
         }
     }
 
+    /**
+     * Set the button Text which gets hidden by rectangle drawn on it,
+     * but takes care for match content and related width.
+     *
+     * @param start helps in determining about which text to show.
+     */
     private void setCurrentText(boolean start) {
         String currentText;
         if (start) {
-            currentText = stripedDrawable.getLoadingText() == null
-                    ? defaultText
-                    : stripedDrawable.getLoadingText();
+            currentText = mStripedDrawable.getLoadingText() == null
+                    ? mDefaultText
+                    : mStripedDrawable.getLoadingText();
         } else {
-            currentText = defaultText;
+            currentText = mDefaultText;
         }
         setText(currentText);
     }
 
     /**
-     * Get current start animation duration
+     * Get current start animation duration.
+     *
      * @return start duration in ms
      */
     public long getStartAnimDuration() {
-        return startAnimDuration;
+        return mStartAnimDuration;
     }
 
     /**
-     * Set start animation duration in ms
+     * Set start animation duration in ms.
+     *
+     * @param startAnimDuration set duration in ms.
      */
     public StripedProcessButton setStartAnimDuration(long startAnimDuration) {
-        this.startAnimDuration = startAnimDuration;
+        this.mStartAnimDuration = startAnimDuration;
         invalidate();
         return this;
     }
 
     /**
-     * Get current stop animation duration
-     * @return stop duration in ms
+     * Get current stop animation duration in ms.
      */
     public long getStopAnimDuration() {
-        return stopAnimDuration;
+        return mStopAnimDuration;
     }
 
     /**
-     * Set stop animation duration in ms
+     * Set stop animation duration in ms.
+     *
+     * @param stopAnimDuration set duration.
      */
     public StripedProcessButton setStopAnimDuration(long stopAnimDuration) {
-        this.stopAnimDuration = stopAnimDuration;
+        this.mStopAnimDuration = stopAnimDuration;
         invalidate();
         return this;
     }
 
     /**
-     * Get text when button has loading state
-     * @return loading text
+     * Get text when button has loading state.
      */
     public String getLoadingText() {
-        return stripedDrawable.getLoadingText();
+        return mStripedDrawable.getLoadingText();
     }
 
     /**
-     * Set text when button has loading state
-     * @param loadingText text when loading started
+     * Set text when button has loading state.
+     *
+     * @param loadingText sets text when loading started
      */
     public StripedProcessButton setLoadingText(String loadingText) {
-        stripedDrawable.setLoadingText(loadingText);
+        mStripedDrawable.setLoadingText(loadingText);
         invalidate();
         return this;
     }
 
     /**
-     * Get button stripe animation state
-     * @return true if button can be animated
+     * Get button stripe animation state.
+     *
+     * @return true if button is animated else false
      */
     public boolean isButtonAnimated() {
-        return buttonAnimated;
+        return mButtonAnimated;
     }
 
     /**
-     * Set button stripe animation state
-     * @param buttonAnimated if tru button can be animated
+     * Set button stripe animation state.
+     *
+     * @param buttonAnimated if true button can be animated
      */
     public StripedProcessButton setButtonAnimated(boolean buttonAnimated) {
-        this.buttonAnimated = buttonAnimated;
+        this.mButtonAnimated = buttonAnimated;
         invalidate();
         return this;
     }
 
     /**
-     * Get width of stripes
+     * Get width of stripes.
      */
     public float getStripeWidth() {
-        return stripedDrawable.getStripeWidth();
+        return mStripedDrawable.getStripeWidth();
     }
 
     /**
-     * Set width of stripes
+     * Set width of stripes.
+     *
      * @param stripeWidth on view
      */
     public StripedProcessButton setStripeWidth(float stripeWidth) {
-        stripedDrawable.setStripeWidth(stripeWidth * density);
+        mStripedDrawable.setStripeWidth(stripeWidth * mDensity);
         invalidate();
         return this;
     }
 
     /**
-     * Get drawable background color
+     * Get drawable background color.
      */
     public int getColorBack() {
-        return stripedDrawable.getColorBack();
+        return mStripedDrawable.getColorBack();
     }
 
     /**
-     * Set drawable background color
+     * Set drawable background color.
+     *
      * @param colorBack background color
      */
     public StripedProcessButton setColorBack(int colorBack) {
-        stripedDrawable.setColorBack(colorBack);
+        mStripedDrawable.setColorBack(colorBack);
         invalidate();
         return this;
     }
 
     /**
-     * Get color the main stripe
+     * Get color the main stripe.
      */
     public int getColorMain() {
-        return stripedDrawable.getColorMain();
+        return mStripedDrawable.getColorMain();
     }
 
     /**
-     * Set color the main stripe
+     * Set color the main stripe.
+     *
      * @param colorMain color of main stripe
      */
     public StripedProcessButton setColorMain(int colorMain) {
-        stripedDrawable.setColorMain(colorMain);
+        mStripedDrawable.setColorMain(colorMain);
         invalidate();
         return this;
     }
 
     /**
-     * Get color the sub stripe
+     * Get color the sub stripe.
      */
     public int getColorSub() {
-        return stripedDrawable.getColorSub();
+        return mStripedDrawable.getColorSub();
     }
 
     /**
-     * Set color the sub stripe
+     * Set color the sub stripe.
+     *
      * @param colorSub color of sub stripe
      */
     public StripedProcessButton setColorSub(int colorSub) {
-        stripedDrawable.setColorSub(colorSub);
+        mStripedDrawable.setColorSub(colorSub);
         invalidate();
         return this;
     }
 
     /**
-     * Get alpha stripes
+     * Get alpha stripes.
      */
     public float getStripeAlpha() {
-        return stripedDrawable.getStripeAlpha();
+        return mStripedDrawable.getStripeAlpha();
     }
 
     /**
-     * Set alpha drawable stripes
+     * Set alpha drawable stripes.
+     *
      * @param alpha stripes
      */
     public StripedProcessButton setStripeAlpha(float alpha) {
-        stripedDrawable.setStripeAlpha(alpha);
+        mStripedDrawable.setStripeAlpha(alpha);
         invalidate();
         return this;
     }
 
     /**
-     * Get drawable corner radius
+     * Get drawable corner radius.
      */
     public float getCornerRadius() {
-        return stripedDrawable.getCornerRadius();
+        return mStripedDrawable.getCornerRadius();
     }
 
     /**
-     * Set drawable corner radius
+     * Set drawable corner radius.
+     *
      * @param cornerRadius radius
      */
     public StripedProcessButton setCornerRadius(float cornerRadius) {
-        stripedDrawable.setCornerRadius(cornerRadius);
+        mStripedDrawable.setCornerRadius(cornerRadius);
         invalidate();
         return this;
     }
 
     /**
-     * Get duration of stripes animation
+     * Get duration of stripes animation.
      */
     public int getStripeDuration() {
-        return stripedDrawable.getStripeDuration();
+        return mStripedDrawable.getStripeDuration();
     }
 
     /**
-     * Set duration of stripes animation
+     * Set duration of stripes animation.
+     *
+     * @param stripeDuration set duration.
      */
     public StripedProcessButton setStripeDuration(int stripeDuration) {
-        stripedDrawable.setStripeDuration(stripeDuration);
+        mStripedDrawable.setStripeDuration(stripeDuration);
         invalidate();
         return this;
     }
 
     /**
-     * Get tilt of stripes
+     * Get tilt of stripes.
      */
     public float getTilt() {
-        return stripedDrawable.getTilt();
+        return mStripedDrawable.getTilt();
     }
 
     /**
-     * Set tilt of stripes
-     * @param tilt of stripes
+     * Set tilt of stripes.
+     *
+     * @param tilt of stripes.
      */
     public StripedProcessButton setTilt(float tilt) {
-        stripedDrawable.setTilt(tilt);
+        mStripedDrawable.setTilt(tilt);
         invalidate();
         return this;
     }
@@ -341,55 +374,58 @@ public class StripedProcessButton extends AppCompatButton implements Animatable 
      * Get state of tilt stripes. If true - tilt to left, false - tilt to right.
      */
     public boolean isStripeRevert() {
-        return stripedDrawable.isStripeRevert();
+        return mStripedDrawable.isStripeRevert();
     }
 
     /**
      * Get state of tilt stripes.
+     *
      * @param stripeRevert If true - tilt to left, false - tilt to right.
      */
     public StripedProcessButton setStripeRevert(boolean stripeRevert) {
-        stripedDrawable.setStripeRevert(stripeRevert);
+        mStripedDrawable.setStripeRevert(stripeRevert);
         invalidate();
         return this;
     }
 
     /**
-     * Get states of showing stripes
+     * Get states of showing stripes.
      */
     public boolean isShowStripes() {
-        return stripedDrawable.isShowStripes();
+        return mStripedDrawable.isShowStripes();
     }
 
     /**
-     * Set states of showing stripes
+     * Set states of showing stripes.
+     *
      * @param showStripes If true - stripes showing, false - stripes gone.
      */
     public StripedProcessButton setShowStripes(boolean showStripes) {
-        stripedDrawable.setShowStripes(showStripes);
+        mStripedDrawable.setShowStripes(showStripes);
         invalidate();
         return this;
     }
 
     /**
-     * Get states of stripes appearance
+     * Get states of stripes appearance.
      */
     public boolean isStripeGradient() {
-        return stripedDrawable.isStripeGradient();
+        return mStripedDrawable.isStripeGradient();
     }
 
     /**
-     * Set the state of striped appearance of drawable
-     * @param stripeGradient if true stripes has gradient style, false - flat strips
+     * Set the state of striped appearance of drawable.
+     *
+     * @param stripeGradient if true stripes has gradient style, false - flat strips.
      */
     public StripedProcessButton setStripeGradient(boolean stripeGradient) {
-        stripedDrawable.setStripeGradient(stripeGradient);
+        mStripedDrawable.setStripeGradient(stripeGradient);
         invalidate();
         return this;
     }
 
     /**
-     * State of launch methods with delay
+     * State of launch methods with delay.
      */
     private enum State {
         START, STOP
