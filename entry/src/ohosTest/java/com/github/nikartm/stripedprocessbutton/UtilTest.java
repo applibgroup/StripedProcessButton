@@ -16,11 +16,11 @@
 package com.github.nikartm.stripedprocessbutton;
 
 import static org.junit.Assert.*;
-import com.github.nikartm.support.Util;
 import ohos.aafwk.ability.delegation.AbilityDelegatorRegistry;
 import ohos.agp.components.Attr;
 import ohos.agp.components.AttrSet;
 import ohos.app.Context;
+import com.github.nikartm.support.Util;
 import org.junit.Test;
 import java.util.Optional;
 
