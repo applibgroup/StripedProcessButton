@@ -17,7 +17,7 @@
     "package": "com.github.nikartm.stripedprocessbutton",
     "name": ".MyApplication",
     "deviceType": [
-      "phone"
+      "phone","tablet","tv","wearable"
     ],
     "distro": {
       "deliveryWithInstall": true,

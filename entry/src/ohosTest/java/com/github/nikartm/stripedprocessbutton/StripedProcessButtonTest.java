@@ -37,29 +37,11 @@ public class StripedProcessButtonTest {
     private StripedDrawable stripedDrawable;
 
     @Before
-    public void setUp() throws Exception {
-        context = AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
-        attrSet = new AttrSet() {
-            @Override
-            public Optional<String> getStyle() {
-                return Optional.empty();
-            }
-
-            @Override
-            public int getLength() {
-                return 0;
-            }
-
-            @Override
-            public Optional<Attr> getAttr(int i) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<Attr> getAttr(String s) {
-                return Optional.empty();
-            }
-        };
+    public void setUp()
+    {
+        UtilTest util = new UtilTest();
+        context = util.setUpContext(context);
+        attrSet = util.setUpAttrSet(attrSet);
     }
 
     @Test

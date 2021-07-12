@@ -2,6 +2,9 @@ package com.github.nikartm.stripedprocessbutton;
 
 import ohos.aafwk.ability.AbilityPackage;
 
+/**
+ * MyApplication Class.
+ */
 public class MyApplication extends AbilityPackage {
     @Override
     public void onInitialize() {
