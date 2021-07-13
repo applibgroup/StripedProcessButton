@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.github.nikartm.stripedprocessbutton.slice;
 
 import ohos.aafwk.ability.AbilitySlice;
@@ -30,18 +31,18 @@ public class MainAbilitySlice extends AbilitySlice {
         super.onStart(intent);
         super.setUIContent(ResourceTable.Layout_ability_main);
         StripedProcessButton stripedButton = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_start);
-        Button btnStop = (Button) findComponentById(ResourceTable.Id_btn_stop);
-        StripedProcessButton btn2 = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_2);
-        StripedProcessButton btn3 = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_3);
-        StripedProcessButton btn4 = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_4);
-        btn3.start();
-        btn4.start();
+        StripedProcessButton button2 = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_2);
         stripedButton.setClickedListener(v -> stripedButton.start());
-        btn2.setClickedListener(v -> btn2.start());
+        button2.setClickedListener(v -> button2.start());
+        StripedProcessButton button3 = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_3);
+        StripedProcessButton button4 = (StripedProcessButton) findComponentById(ResourceTable.Id_btn_4);
+        Button btnStop = (Button) findComponentById(ResourceTable.Id_btn_stop);
         btnStop.setClickedListener(component -> {
             stripedButton.stop();
-            btn2.stop();
+            button2.stop();
         });
+        button3.start();
+        button4.start();
     }
 
     @Override
