@@ -15,7 +15,7 @@
  */
 package com.github.nikartm.stripedprocessbutton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import ohos.aafwk.ability.delegation.AbilityDelegatorRegistry;
 import ohos.agp.components.Attr;
 import ohos.agp.components.AttrSet;
