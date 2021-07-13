@@ -20,7 +20,7 @@ Can observe both buttons clicked in the gif, they are set to true for stripe gra
 * All these functionalities can also be adjusted programmatically, a related snippet is shown in the Usage section.
 ## Installation Instructions
 1.For using StripedProcessButton module in sample app, include the source code and add the below dependencies in entry/build.gradle to generate hap/support.har.
-```
+```groovy
 	dependencies {
 		implementation project(':support')
         	implementation fileTree(dir: 'libs', include: ['*.har'])
@@ -28,7 +28,7 @@ Can observe both buttons clicked in the gif, they are set to true for stripe gra
 	}
 ```
 2.For using StripedProcessButton in separate application using har file, add the har file in the entry/libs folder and add the dependencies in entry/build.gradle file.
-```
+```groovy
 	dependencies {
 		implementation fileTree(dir: 'libs', include: ['*.har'])
 		testCompile 'junit:junit:4.12'
@@ -36,7 +36,7 @@ Can observe both buttons clicked in the gif, they are set to true for stripe gra
 ```
 ## Usage
 Adjust the xml view
-```
+```xml
 <com.alpesh.strippedprocessbutton.StripedProcessButton
         ohos:id="$+id:btn_start"
         ohos:left_margin="16fp"
