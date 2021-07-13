@@ -15,67 +15,73 @@
  */
 package com.github.nikartm.stripedprocessbutton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import ohos.agp.text.Font;
 import ohos.agp.utils.Color;
 import com.github.nikartm.support.StripedDrawable;
 import org.junit.Test;
 
 public class StripedDrawableTest {
+    private static final float VALUE = 20;
+    private static final String COLOR = "#4CAF50";
+    private static final String TEST_TEXT = "Loading";
+
     @Test
     public void setStripeWidth() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setStripeWidth(20.0f);
-        assertEquals(String.valueOf(stripedDrawable.getStripeWidth()),String.valueOf(20.0f));
+        stripedDrawable.setStripeWidth(VALUE);
+        assertEquals(String.valueOf(stripedDrawable.getStripeWidth()),String.valueOf(VALUE));
     }
 
     @Test
     public void setColorBack() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setColorBack(Color.getIntColor("#4CAF50"));
-        assertEquals(Color.getIntColor("#4CAF50"),stripedDrawable.getColorBack());
+        stripedDrawable.setColorBack(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getColorBack());
     }
 
     @Test
     public void setColorMain() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setColorMain(Color.getIntColor("#4CAF50"));
-        assertEquals(Color.getIntColor("#4CAF50"),stripedDrawable.getColorMain());
+        stripedDrawable.setColorMain(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getColorMain());
     }
 
     @Test
     public void setColorSub() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setColorSub(Color.getIntColor("#4CAF50"));
-        assertEquals(Color.getIntColor("#4CAF50"),stripedDrawable.getColorSub());
+        stripedDrawable.setColorSub(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getColorSub());
     }
 
     @Test
     public void setStripeAlpha() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setStripeAlpha(20.0f);
-        assertEquals(String.valueOf(stripedDrawable.getStripeAlpha()),String.valueOf(20.0f));
+        stripedDrawable.setStripeAlpha(VALUE);
+        assertEquals(String.valueOf(stripedDrawable.getStripeAlpha()),String.valueOf(VALUE));
     }
 
     @Test
     public void setCornerRadius() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setCornerRadius(20.0f);
-        assertEquals(String.valueOf(stripedDrawable.getCornerRadius()),String.valueOf(20.0f));
+        stripedDrawable.setCornerRadius(VALUE);
+        assertEquals(String.valueOf(stripedDrawable.getCornerRadius()),String.valueOf(VALUE));
     }
 
     @Test
     public void setStripeDuration() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setStripeDuration(200);
-        assertEquals(String.valueOf(stripedDrawable.getStripeDuration()),String.valueOf(200));
+        int stripeDuration = 200;
+        stripedDrawable.setStripeDuration(stripeDuration);
+        assertEquals(String.valueOf(stripedDrawable.getStripeDuration()),String.valueOf(stripeDuration));
     }
 
     @Test
     public void setTilt() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setTilt(20f);
-        assertEquals(String.valueOf(stripedDrawable.getTilt()),String.valueOf(20f));
+        stripedDrawable.setTilt(VALUE);
+        assertEquals(String.valueOf(stripedDrawable.getTilt()),String.valueOf(VALUE));
     }
 
     @Test
@@ -102,29 +108,30 @@ public class StripedDrawableTest {
     @Test
     public void setLoadingText() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setLoadingText("20f");
-        assertEquals("20f",stripedDrawable.getLoadingText());
+        stripedDrawable.setLoadingText(TEST_TEXT);
+        assertEquals(TEST_TEXT,stripedDrawable.getLoadingText());
     }
 
     @Test
     public void setButtonText() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setButtonText("20f");
-        assertEquals("20f",stripedDrawable.getButtonText());
+        stripedDrawable.setButtonText(TEST_TEXT);
+        assertEquals(TEST_TEXT,stripedDrawable.getButtonText());
     }
 
     @Test
     public void setTextColor() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setTextColor(0x4CAF50);
-        assertEquals(0x4CAF50,stripedDrawable.getTextColor());
+        stripedDrawable.setTextColor(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getTextColor());
     }
 
     @Test
     public void setTextSize() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setTextSize(20);
-        assertEquals(String.valueOf(stripedDrawable.getTextSize()),String.valueOf(20));
+        int textSize = 20;
+        stripedDrawable.setTextSize(textSize);
+        assertEquals(String.valueOf(stripedDrawable.getTextSize()),String.valueOf(textSize));
     }
 
     @Test

@@ -26,7 +26,6 @@ public class AnimatedStripedDrawable extends ShapeElement implements Element.OnC
     private boolean mRunning = false;
     private StripedDrawable mDrawable;
     private AnimatorValue mAnimator;
-    private Shader mStripesShader;
     private Component mComponent;
 
     public AnimatedStripedDrawable(StripedDrawable drawable) {
@@ -98,10 +97,11 @@ public class AnimatedStripedDrawable extends ShapeElement implements Element.OnC
         final int stripesAlpha = Util.computeAlpha(mDrawable.getStripeAlpha());
         paintBack.setAntiAlias(true);
         paintStripes.setAntiAlias(true);
+        Shader stripesShader;
         if (mDrawable.isStripeGradient()) {
-            mStripesShader = createGradientShader();
+            stripesShader = createGradientShader();
         } else {
-            mStripesShader = createShader();
+            stripesShader = createShader();
         }
         textPaint.setAntiAlias(true);
         textPaint.setColor(new Color(mDrawable.getTextColor()));
@@ -115,7 +115,7 @@ public class AnimatedStripedDrawable extends ShapeElement implements Element.OnC
                 mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
         if (mDrawable.isShowStripes()) {
             paintStripes.setAlpha(stripesAlpha);
-            paintStripes.setShader(mStripesShader, Paint.ShaderType.LINEAR_SHADER);
+            paintStripes.setShader(stripesShader, Paint.ShaderType.LINEAR_SHADER);
             canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paintStripes);
             canvas.drawText(textPaint, mDrawable.getLoadingText(),
                     mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);

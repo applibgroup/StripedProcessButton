@@ -15,16 +15,15 @@
  */
 package com.github.nikartm.stripedprocessbutton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import ohos.agp.animation.Animator;
 import ohos.agp.animation.AnimatorValue;
-import ohos.agp.components.Attr;
 import ohos.agp.components.AttrSet;
 import com.github.nikartm.support.AttributeController;
 import com.github.nikartm.support.StripedDrawable;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.Optional;
 
 public class AnimatedStripedDrawableTest {
     private StripedDrawable drawable;
@@ -32,32 +31,14 @@ public class AnimatedStripedDrawableTest {
     private AttrSet attrSet;
 
     @Before
-    public void setUp() throws Exception {
-        attrSet = new AttrSet() {
-            @Override
-            public Optional<String> getStyle() {
-                return Optional.empty();
-            }
-
-            @Override
-            public int getLength() {
-                return 0;
-            }
-
-            @Override
-            public Optional<Attr> getAttr(int i) {
-                return Optional.empty();
-            }
-
-            @Override
-            public Optional<Attr> getAttr(String s) {
-                return Optional.empty();
-            }
-        };
+    public void setUp()
+    {
+        UtilTest util = new UtilTest();
+        attrSet = util.setUpAttrSet();
     }
 
     @Test
-    public void isRunning_initially() {
+    public void isRunningInitially() {
         AttributeController attrController = new AttributeController(attrSet);
         drawable = attrController.getStripedDrawable();
         animator = new AnimatorValue();
@@ -68,7 +49,7 @@ public class AnimatedStripedDrawableTest {
     }
 
     @Test
-    public void isRunning_onStart() {
+    public void isRunningOnStart() {
         AttributeController attrController = new AttributeController(attrSet);
         drawable = attrController.getStripedDrawable();
         animator = new AnimatorValue();
@@ -80,7 +61,7 @@ public class AnimatedStripedDrawableTest {
     }
 
     @Test
-    public void isRunning_onStop() {
+    public void isRunningOnStop() {
         AttributeController attrController = new AttributeController(attrSet);
         drawable = attrController.getStripedDrawable();
         animator = new AnimatorValue();

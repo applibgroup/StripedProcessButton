@@ -15,19 +15,51 @@
  */
 package com.github.nikartm.stripedprocessbutton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import ohos.aafwk.ability.delegation.AbilityDelegatorRegistry;
+import ohos.agp.components.Attr;
+import ohos.agp.components.AttrSet;
+import ohos.app.Context;
 import com.github.nikartm.support.Util;
 import org.junit.Test;
+import java.util.Optional;
 
 public class UtilTest {
     private static final int MAX_ALPHA = 255;
     private static final int MIN_ALPHA = 0;
-    private Util util;
+
+    public Context setUpContext() {
+        return AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
+    }
+
+    public AttrSet setUpAttrSet() {
+        return new AttrSet() {
+            @Override
+            public Optional<String> getStyle() {
+                return Optional.empty();
+            }
+
+            @Override
+            public int getLength() {
+                return 0;
+            }
+
+            @Override
+            public Optional<Attr> getAttr(int i) {
+                return Optional.empty();
+            }
+
+            @Override
+            public Optional<Attr> getAttr(String s) {
+                return Optional.empty();
+            }
+        };
+    }
 
     @Test
     public void computeAlpha() {
-        assertEquals(Util.computeAlpha(1),MAX_ALPHA);
-        assertEquals(Util.computeAlpha(0),MIN_ALPHA);
+        assertEquals(MAX_ALPHA,Util.computeAlpha(1));
+        assertEquals(MIN_ALPHA,Util.computeAlpha(0));
         assertEquals(Util.computeAlpha(0.5f),(int)(MAX_ALPHA/2));
     }
 }
