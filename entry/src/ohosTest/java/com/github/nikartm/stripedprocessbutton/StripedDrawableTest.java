@@ -22,7 +22,7 @@ import com.github.nikartm.support.StripedDrawable;
 import org.junit.Test;
 
 public class StripedDrawableTest {
-    private final String mColor = "#4CAF50";
+    private static final String COLOR = "#4CAF50";
     @Test
     public void setStripeWidth() {
         StripedDrawable stripedDrawable = new StripedDrawable();
@@ -33,22 +33,22 @@ public class StripedDrawableTest {
     @Test
     public void setColorBack() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setColorBack(Color.getIntColor(mColor));
-        assertEquals(Color.getIntColor(mColor),stripedDrawable.getColorBack());
+        stripedDrawable.setColorBack(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getColorBack());
     }
 
     @Test
     public void setColorMain() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setColorMain(Color.getIntColor(mColor));
-        assertEquals(Color.getIntColor(mColor),stripedDrawable.getColorMain());
+        stripedDrawable.setColorMain(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getColorMain());
     }
 
     @Test
     public void setColorSub() {
         StripedDrawable stripedDrawable = new StripedDrawable();
-        stripedDrawable.setColorSub(Color.getIntColor(mColor));
-        assertEquals(Color.getIntColor(mColor),stripedDrawable.getColorSub());
+        stripedDrawable.setColorSub(Color.getIntColor(COLOR));
+        assertEquals(Color.getIntColor(COLOR),stripedDrawable.getColorSub());
     }
 
     @Test

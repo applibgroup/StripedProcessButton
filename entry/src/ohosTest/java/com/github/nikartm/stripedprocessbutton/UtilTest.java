@@ -28,13 +28,12 @@ public class UtilTest {
     private static final int MAX_ALPHA = 255;
     private static final int MIN_ALPHA = 0;
 
-    public Context setUpContext(Context context) {
-        context = AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
-        return context;
+    public Context setUpContext() {
+        return AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
     }
 
-    public AttrSet setUpAttrSet(AttrSet attrSet) {
-        attrSet = new AttrSet() {
+    public AttrSet setUpAttrSet() {
+        return new AttrSet() {
             @Override
             public Optional<String> getStyle() {
                 return Optional.empty();
@@ -55,7 +54,6 @@ public class UtilTest {
                 return Optional.empty();
             }
         };
-        return attrSet;
     }
 
     @Test

@@ -21,22 +21,19 @@ import ohos.agp.animation.AnimatorValue;
 import ohos.agp.components.AttrSet;
 import com.github.nikartm.support.AttributeController;
 import com.github.nikartm.support.StripedDrawable;
-import ohos.app.Context;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AnimatedStripedDrawableTest {
     private StripedDrawable drawable;
     private AnimatorValue animator;
-    private Context context;
     private AttrSet attrSet;
 
     @Before
     public void setUp()
     {
         UtilTest util = new UtilTest();
-        context = util.setUpContext(context);
-        attrSet = util.setUpAttrSet(attrSet);
+        attrSet = util.setUpAttrSet();
     }
 
     @Test

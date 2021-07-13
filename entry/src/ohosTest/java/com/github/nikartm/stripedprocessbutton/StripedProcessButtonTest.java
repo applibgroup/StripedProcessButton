@@ -37,8 +37,8 @@ public class StripedProcessButtonTest {
     public void setUp()
     {
         UtilTest util = new UtilTest();
-        context = util.setUpContext(context);
-        attrSet = util.setUpAttrSet(attrSet);
+        context = util.setUpContext();
+        attrSet = util.setUpAttrSet();
     }
 
     @Test
