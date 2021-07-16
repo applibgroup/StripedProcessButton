@@ -1,7 +1,8 @@
 package com.github.nikartm.support;
 
 /**
- * Used for calculating alpha value required to set StripeAlpha.
+ * @author Ivan V on 29.03.2018.
+ * @version 1.0
  */
 public class Util {
     private static final int MAX_ALPHA = 255;
