@@ -4,6 +4,8 @@ import ohos.agp.text.Font;
 import ohos.agp.utils.Color;
 
 /**
+ * Striped Drawable class, has getters and setters for attributes to store.
+ *
  * @author Ivan V on 07.04.2018.
  * @version 1.0
  */

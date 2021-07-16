@@ -9,7 +9,8 @@ import ohos.app.Context;
 import com.github.nikartm.support.constant.Constants;
 
 /**
- * Striped process button
+ * Striped process button.
+ *
  * @author Ivan V on 29.03.2018.
  * @version 1.0
  */

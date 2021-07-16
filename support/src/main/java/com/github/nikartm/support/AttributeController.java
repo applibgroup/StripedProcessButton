@@ -4,7 +4,8 @@ import ohos.agp.components.AttrSet;
 import com.github.nikartm.support.constant.Constants;
 
 /**
- * Controller attrs of striped process button
+ * Controller attrs of striped process button.
+ *
  * @author Ivan V on 29.03.2018.
  * @version 1.0
  */

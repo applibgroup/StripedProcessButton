@@ -16,7 +16,8 @@ import ohos.agp.utils.RectFloat;
 import ohos.agp.utils.TextAlignment;
 
 /**
- * Animated striped drawable
+ * Animated striped drawable.
+ *
  * @author Ivan V on 30.03.2018.
  * @version 1.0
  */

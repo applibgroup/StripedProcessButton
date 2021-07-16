@@ -1,6 +1,8 @@
 package com.github.nikartm.support;
 
 /**
+ * Util Class.
+ *
  * @author Ivan V on 29.03.2018.
  * @version 1.0
  */
