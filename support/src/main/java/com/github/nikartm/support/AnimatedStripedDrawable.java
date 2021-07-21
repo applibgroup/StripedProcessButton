@@ -16,7 +16,10 @@ import ohos.agp.utils.RectFloat;
 import ohos.agp.utils.TextAlignment;
 
 /**
- * AnimatedStripedDrawable Class.
+ * Animated striped drawable.
+ *
+ * @author Ivan V on 30.03.2018.
+ * @version 1.0
  */
 public class AnimatedStripedDrawable extends ShapeElement implements Element.OnChangeListener {
     private int mViewHeight;

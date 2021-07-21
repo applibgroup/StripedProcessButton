@@ -4,7 +4,10 @@ import ohos.agp.components.AttrSet;
 import com.github.nikartm.support.constant.Constants;
 
 /**
- * AttributeController class to get Attributes from XML and set them to {@link StripedDrawable}.
+ * Controller attrs of striped process button.
+ *
+ * @author Ivan V on 29.03.2018.
+ * @version 1.0
  */
 public class AttributeController {
     private StripedDrawable mStripedDrawable;

@@ -10,6 +10,9 @@ import com.github.nikartm.support.constant.Constants;
 
 /**
  * Striped process button.
+ *
+ * @author Ivan V on 29.03.2018.
+ * @version 1.0
  */
 public class StripedProcessButton extends Button implements Component.BindStateChangedListener, Component.DrawTask {
     private AnimatedStripedDrawable mAnimatedDrawable;

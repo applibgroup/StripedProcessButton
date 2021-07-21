@@ -1,3 +1,5 @@
+[![Build](https://github.com/applibgroup/StripedProcessButton/actions/workflows/main.yml/badge.svg)](https://github.com/applibgroup/StripedProcessButton/actions/workflows/main.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=applibgroup_StripedProcessButton&metric=alert_status)](https://sonarcloud.io/dashboard?id=applibgroup_StripedProcessButton)
 # StripedProcessButton
 It's an HarmonyOS library that provides an Animated striped button to show the loading process.
 
