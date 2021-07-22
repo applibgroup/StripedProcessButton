@@ -19,22 +19,47 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import ohos.agp.animation.Animator;
 import ohos.agp.animation.AnimatorValue;
+import ohos.agp.components.Attr;
 import ohos.agp.components.AttrSet;
 import com.github.nikartm.support.AttributeController;
 import com.github.nikartm.support.StripedDrawable;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.Optional;
 
 public class AnimatedStripedDrawableTest {
     private StripedDrawable drawable;
     private AnimatorValue animator;
     private AttrSet attrSet;
 
+    public AttrSet setUpAttrSet() {
+        return new AttrSet() {
+            @Override
+            public Optional<String> getStyle() {
+                return Optional.empty();
+            }
+
+            @Override
+            public int getLength() {
+                return 0;
+            }
+
+            @Override
+            public Optional<Attr> getAttr(int i) {
+                return Optional.empty();
+            }
+
+            @Override
+            public Optional<Attr> getAttr(String s) {
+                return Optional.empty();
+            }
+        };
+    }
+
     @Before
     public void setUp()
     {
-        UtilTest util = new UtilTest();
-        attrSet = util.setUpAttrSet();
+        attrSet = setUpAttrSet();
     }
 
     @Test

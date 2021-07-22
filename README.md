@@ -69,7 +69,7 @@ stripedButton.setCornerRadius(50)
         .start();
 ```
 ## Future work
-Circular Reveal animation for button feature is currently not supported. One's platform includes this, it can be integrated here.
+Circular Reveal animation for button feature is currently not supported. Once the platform includes this, it can be integrated here.
 ## License
 Copyright 2018 Ivan Vodyasov
 

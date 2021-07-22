@@ -14,7 +14,7 @@
     },
     {
       "name": "StartProcess",
-      "value": "Start process"
+      "value": "START PROCESS"
     },
     {
       "name": "stop",
@@ -26,7 +26,7 @@
     },
     {
       "name": "Process2",
-      "value": "Click"
+      "value": "CLICK"
     },
     {
       "name": "Process4",
@@ -35,6 +35,10 @@
     {
       "name": "SansSerif",
       "value": "sans-serif"
+    },
+    {
+      "name": "LoadingText",
+      "value": "LOADING..."
     }
   ]
 }

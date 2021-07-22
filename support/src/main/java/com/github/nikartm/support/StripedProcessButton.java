@@ -18,8 +18,6 @@ public class StripedProcessButton extends Button implements Component.BindStateC
     private AnimatedStripedDrawable mAnimatedDrawable;
     private StripedDrawable mStripedDrawable;
     private State mState = State.STOP;
-    private long mStartAnimDuration = Constants.NO_INIT;
-    private long mStopAnimDuration = Constants.NO_INIT;
     private boolean mButtonAnimated = Constants.DEF_BUTTON_ANIM;
     private String mDefaultText;
     private float mDensity;
@@ -62,7 +60,7 @@ public class StripedProcessButton extends Button implements Component.BindStateC
 
     @Override
     public void onComponentBoundToWindow(Component component) {
-        mDefaultText = getText() != null ? getText() : "test...";
+        mDefaultText = getText() != null ? getText() : "";
         launchAnimationWithDelay();
     }
 
@@ -144,51 +142,16 @@ public class StripedProcessButton extends Button implements Component.BindStateC
     private void setCurrentText(boolean start) {
         String currentText;
         if (start) {
-            currentText = mStripedDrawable.getLoadingText() == null
-                    ? mDefaultText
-                    : mStripedDrawable.getLoadingText();
+            if (mStripedDrawable.getLoadingText() == null) {
+                currentText = mDefaultText;
+                mStripedDrawable.setLoadingText(mDefaultText);
+            } else {
+                currentText = mStripedDrawable.getLoadingText();
+            }
         } else {
             currentText = mDefaultText;
         }
         setText(currentText);
-    }
-
-    /**
-     * Get current start animation duration.
-     *
-     * @return start duration in ms
-     */
-    public long getStartAnimDuration() {
-        return mStartAnimDuration;
-    }
-
-    /**
-     * Set start animation duration in ms.
-     *
-     * @param startAnimDuration set duration in ms.
-     */
-    public StripedProcessButton setStartAnimDuration(long startAnimDuration) {
-        this.mStartAnimDuration = startAnimDuration;
-        invalidate();
-        return this;
-    }
-
-    /**
-     * Get current stop animation duration in ms.
-     */
-    public long getStopAnimDuration() {
-        return mStopAnimDuration;
-    }
-
-    /**
-     * Set stop animation duration in ms.
-     *
-     * @param stopAnimDuration set duration.
-     */
-    public StripedProcessButton setStopAnimDuration(long stopAnimDuration) {
-        this.mStopAnimDuration = stopAnimDuration;
-        invalidate();
-        return this;
     }
 
     /**

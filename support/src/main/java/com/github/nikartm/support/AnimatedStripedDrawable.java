@@ -97,7 +97,6 @@ public class AnimatedStripedDrawable extends ShapeElement implements Element.OnC
         final Paint textPaint = new Paint();
         final Rect rect = new Rect(0, 0, mViewWidth, mViewHeight);
         final RectFloat rectF = new RectFloat(rect);
-        final int stripesAlpha = Util.computeAlpha(mDrawable.getStripeAlpha());
         paintBack.setAntiAlias(true);
         paintStripes.setAntiAlias(true);
         Shader stripesShader;
@@ -114,13 +113,14 @@ public class AnimatedStripedDrawable extends ShapeElement implements Element.OnC
         paintBack.setColor(new Color(mDrawable.getColorBack()));
         float cornerRadius = mDrawable.getCornerRadius();
         canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paintBack);
-        canvas.drawText(textPaint, mDrawable.getButtonText(),
-                mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
         if (mDrawable.isShowStripes()) {
-            paintStripes.setAlpha(stripesAlpha);
+            paintStripes.setAlpha(mDrawable.getStripeAlpha());
             paintStripes.setShader(stripesShader, Paint.ShaderType.LINEAR_SHADER);
             canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paintStripes);
             canvas.drawText(textPaint, mDrawable.getLoadingText(),
+                    mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
+        } else {
+            canvas.drawText(textPaint, mDrawable.getButtonText(),
                     mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
         }
     }
