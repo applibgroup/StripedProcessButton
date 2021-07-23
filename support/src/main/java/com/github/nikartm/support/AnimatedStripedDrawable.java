@@ -117,7 +117,7 @@ public class AnimatedStripedDrawable extends ShapeElement implements Element.OnC
             paintStripes.setAlpha(mDrawable.getStripeAlpha());
             paintStripes.setShader(stripesShader, Paint.ShaderType.LINEAR_SHADER);
             canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paintStripes);
-            canvas.drawText(textPaint, mDrawable.getLoadingText(),
+            canvas.drawText(textPaint, isRunning() ? mDrawable.getLoadingText() : mDrawable.getButtonText(),
                     mViewWidth / 2f, (mViewHeight + textPaint.getTextSize()) / 2f);
         } else {
             canvas.drawText(textPaint, mDrawable.getButtonText(),
