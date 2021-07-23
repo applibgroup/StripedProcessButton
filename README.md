@@ -7,7 +7,7 @@ It's an HarmonyOS library that provides an Animated striped button to show the l
 Inspired by https://github.com/nikartm/StripedProcessButton Version v2.0.0
 
 ## Screenshot
-<img src = "https://github.com/alpesh12345/StripedProcessButton/blob/main/screenshots/stripedprocessbutton.gif"/>
+<img src = "https://github.com/alpesh12345/StripedProcessButton/blob/main/screenshots/gif_spb.gif"/>
 
 ## Features
 It provides an animated striped button that appears to be normal (depends on you to show or hide strips) but when clicked it gets animated according to attributes to show the loading process. 
