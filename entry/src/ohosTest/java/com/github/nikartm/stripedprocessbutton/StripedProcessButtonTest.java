@@ -48,9 +48,8 @@ public class StripedProcessButtonTest {
     @Before
     public void setUp()
     {
-        AnimatedStripedDrawableTest animatedStripedDrawableTest = new AnimatedStripedDrawableTest();
         context = setUpContext();
-        attrSet = animatedStripedDrawableTest.setUpAttrSet();
+        attrSet = Util.setUpAttrSet();
     }
 
     @Test
