@@ -7,7 +7,7 @@ It's an HarmonyOS library that provides an Animated striped button to show the l
 Inspired by https://github.com/nikartm/StripedProcessButton Version v2.0.0
 
 ## Screenshot
-<img src = "https://github.com/alpesh12345/StripedProcessButton/blob/main/screenshots/stripedprocessbutton.gif"/>
+![](screenshots/gif_spb.gif)
 
 ## Features
 It provides an animated striped button that appears to be normal (depends on you to show or hide strips) but when clicked it gets animated according to attributes to show the loading process. 
@@ -69,7 +69,7 @@ stripedButton.setCornerRadius(50)
         .start();
 ```
 ## Future work
-Circular Reveal animation for button feature is currently not supported. One's platform includes this, it can be integrated here.
+Circular Reveal animation for button feature is currently not supported. Once the platform includes this, it can be integrated here.
 ## License
 Copyright 2018 Ivan Vodyasov
 

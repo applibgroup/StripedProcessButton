@@ -17,7 +17,6 @@ public class Constants {
     public static final boolean REVERT = false;
     public static final boolean SHOW_STRIPES = false;
     public static final boolean GRADIENT = true;
-    public static final int NO_INIT = -1;
     public static final boolean DEF_BUTTON_ANIM = true;
     public static final int DEF_BACKGROUND = Color.getIntColor("#4CAF50");
     public static final int DEF_MAIN_STRIPE = Color.getIntColor("#4CAF50");

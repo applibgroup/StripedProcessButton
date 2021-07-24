@@ -32,7 +32,7 @@ public class AttributeController {
     private void initAttrs(AttrSet attrs) {
         if (attrs != null) {
             String loadingText = attrs.getAttr(LOADING_TEXT).isPresent() ? attrs.getAttr(
-                    LOADING_TEXT).get().getStringValue() : "Loading";
+                    LOADING_TEXT).get().getStringValue() : null;
             mStripedDrawable.setLoadingText(loadingText);
             setAttrsInt(attrs);
             setAttrsFloat(attrs);

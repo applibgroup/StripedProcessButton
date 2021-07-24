@@ -33,8 +33,7 @@ public class AnimatedStripedDrawableTest {
     @Before
     public void setUp()
     {
-        UtilTest util = new UtilTest();
-        attrSet = util.setUpAttrSet();
+        attrSet = Util.setUpAttrSet();
     }
 
     @Test

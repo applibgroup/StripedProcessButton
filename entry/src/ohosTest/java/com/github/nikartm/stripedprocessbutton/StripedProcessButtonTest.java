@@ -15,9 +15,11 @@
  */
 package com.github.nikartm.stripedprocessbutton;
 
+import static ohos.agp.components.AttrHelper.getDensity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import ohos.aafwk.ability.delegation.AbilityDelegatorRegistry;
 import ohos.agp.components.AttrSet;
 import ohos.agp.utils.Color;
 import ohos.app.Context;
@@ -39,54 +41,15 @@ public class StripedProcessButtonTest {
     private AnimatedStripedDrawable animatedDrawable;
     private StripedDrawable stripedDrawable;
 
+    public Context setUpContext() {
+        return AbilityDelegatorRegistry.getAbilityDelegator().getAppContext();
+    }
+
     @Before
     public void setUp()
     {
-        UtilTest util = new UtilTest();
-        context = util.setUpContext();
-        attrSet = util.setUpAttrSet();
-    }
-
-    @Test
-    public void getStartAnimDuration() {
-        AttributeController attrController = new AttributeController(attrSet);
-        stripedDrawable = attrController.getStripedDrawable();
-        stripedProcessButton = new StripedProcessButton(context,attrSet);
-        animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
-        animatedDrawable.setComponent(stripedProcessButton);
-        assertEquals(String.valueOf(stripedProcessButton.getStartAnimDuration()),String.valueOf(-1));// default set to -1
-    }
-
-    @Test
-    public void setStartAnimDuration() {
-        AttributeController attrController = new AttributeController(attrSet);
-        stripedDrawable = attrController.getStripedDrawable();
-        stripedProcessButton = new StripedProcessButton(context,attrSet);
-        animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
-        animatedDrawable.setComponent(stripedProcessButton);
-        stripedProcessButton.setStartAnimDuration(ANIM_DURATION);
-        assertEquals(String.valueOf(stripedProcessButton.getStartAnimDuration()),String.valueOf(ANIM_DURATION));
-    }
-
-    @Test
-    public void getStopAnimDuration() {
-        AttributeController attrController = new AttributeController(attrSet);
-        stripedDrawable = attrController.getStripedDrawable();
-        stripedProcessButton = new StripedProcessButton(context,attrSet);
-        animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
-        animatedDrawable.setComponent(stripedProcessButton);
-        assertEquals(String.valueOf(stripedProcessButton.getStopAnimDuration()),String.valueOf(-1));
-    }
-
-    @Test
-    public void setStopAnimDuration() {
-        AttributeController attrController = new AttributeController(attrSet);
-        stripedDrawable = attrController.getStripedDrawable();
-        stripedProcessButton = new StripedProcessButton(context,attrSet);
-        animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
-        animatedDrawable.setComponent(stripedProcessButton);
-        stripedProcessButton.setStopAnimDuration(ANIM_DURATION);
-        assertEquals(String.valueOf(stripedProcessButton.getStopAnimDuration()),String.valueOf(ANIM_DURATION));
+        context = setUpContext();
+        attrSet = Util.setUpAttrSet();
     }
 
     @Test
@@ -96,7 +59,7 @@ public class StripedProcessButtonTest {
         stripedProcessButton = new StripedProcessButton(context,attrSet);
         animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
         animatedDrawable.setComponent(stripedProcessButton);
-        assertEquals(TEST_TEXT,stripedProcessButton.getLoadingText());
+        assertEquals(null,stripedProcessButton.getLoadingText());//initially null if not set in attributes
     }
 
     @Test
@@ -149,7 +112,7 @@ public class StripedProcessButtonTest {
         animatedDrawable = new AnimatedStripedDrawable(stripedDrawable);
         animatedDrawable.setComponent(stripedProcessButton);
         stripedProcessButton.setStripeWidth(VALUE);
-        float density = stripedProcessButton.getStripeWidth()/VALUE;
+        float density = getDensity(context);
         float stripeWidth = 80f;
         stripedProcessButton.setStripeWidth(stripeWidth);
         assertEquals(String.valueOf(stripedProcessButton.getStripeWidth()),String.valueOf(stripeWidth * density));
