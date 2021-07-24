@@ -5,6 +5,9 @@ import ohos.agp.components.AttrSet;
 import java.util.Optional;
 
 public class Util {
+    private Util() {
+        // private constructor added to hide the implicit public one
+    }
     public static AttrSet setUpAttrSet() {
         return new AttrSet() {
             @Override
