@@ -17,7 +17,7 @@
         ohos:text_weight="700"
         />
 
-    <com.github.nikartm.support.StripedProcessButton
+    <com.github.nikartm.stripedprocessbutton.StripedProcessButton
         ohos:id="$+id:btn_start"
         ohos:left_margin="16fp"
         ohos:right_margin="16fp"
@@ -51,7 +51,7 @@
         ohos:text="$string:stop"
         />
 
-    <com.github.nikartm.support.StripedProcessButton
+    <com.github.nikartm.stripedprocessbutton.StripedProcessButton
         ohos:id="$+id:btn_3"
         ohos:width="150fp"
         ohos:height="150fp"
@@ -74,7 +74,7 @@
         app:spb_loadingText="$string:LoadingText"
         app:spb_cornerRadius="270" />
 
-    <com.github.nikartm.support.StripedProcessButton
+    <com.github.nikartm.stripedprocessbutton.StripedProcessButton
         ohos:width="match_parent"
         ohos:height="70fp"
         ohos:top_margin="40fp"
@@ -98,7 +98,7 @@
         app:spb_stripeWidth="20"
          />
 
-    <com.github.nikartm.support.StripedProcessButton
+    <com.github.nikartm.stripedprocessbutton.StripedProcessButton
         ohos:width="match_parent"
         ohos:height="60fp"
         ohos:top_margin="40fp"

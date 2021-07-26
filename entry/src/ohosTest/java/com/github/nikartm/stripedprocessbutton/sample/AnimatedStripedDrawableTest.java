@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.github.nikartm.stripedprocessbutton;
+package com.github.nikartm.stripedprocessbutton.sample;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import ohos.agp.animation.Animator;
 import ohos.agp.animation.AnimatorValue;
 import ohos.agp.components.AttrSet;
-import com.github.nikartm.support.AttributeController;
-import com.github.nikartm.support.StripedDrawable;
+import com.github.nikartm.stripedprocessbutton.AttributeController;
+import com.github.nikartm.stripedprocessbutton.StripedDrawable;
 import org.junit.Before;
 import org.junit.Test;
 
