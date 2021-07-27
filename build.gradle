@@ -5,7 +5,7 @@ apply plugin: 'checkstyle'
 ohos {
     compileSdkVersion 5
     defaultConfig {
-        compatibleSdkVersion 4
+        compatibleSdkVersion 5
     }
 }
 	
