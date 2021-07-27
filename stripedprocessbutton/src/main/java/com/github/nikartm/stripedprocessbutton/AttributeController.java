@@ -1,7 +1,7 @@
-package com.github.nikartm.support;
+package com.github.nikartm.stripedprocessbutton;
 
 import ohos.agp.components.AttrSet;
-import com.github.nikartm.support.constant.Constants;
+import com.github.nikartm.stripedprocessbutton.constant.Constants;
 
 /**
  * Controller attrs of striped process button.

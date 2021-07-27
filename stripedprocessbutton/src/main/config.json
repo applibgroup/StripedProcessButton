@@ -15,13 +15,13 @@
   "deviceConfig": {
   },
   "module": {
-    "package": "com.github.nikartm.support",
+    "package": "com.github.nikartm.stripedprocessbutton",
     "deviceType": [
       "phone","tablet","tv","wearable"
     ],
     "distro": {
       "deliveryWithInstall": true,
-      "moduleName": "support",
+      "moduleName": "stripedprocessbutton",
       "moduleType": "har"
     }
   }

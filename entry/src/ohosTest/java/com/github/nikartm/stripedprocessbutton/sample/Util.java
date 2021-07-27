@@ -1,4 +1,4 @@
-package com.github.nikartm.stripedprocessbutton;
+package com.github.nikartm.stripedprocessbutton.sample;
 
 import ohos.agp.components.Attr;
 import ohos.agp.components.AttrSet;

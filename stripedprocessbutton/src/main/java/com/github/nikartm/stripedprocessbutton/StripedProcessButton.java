@@ -1,4 +1,4 @@
-package com.github.nikartm.support;
+package com.github.nikartm.stripedprocessbutton;
 
 import static ohos.agp.components.AttrHelper.getDensity;
 import ohos.agp.components.AttrSet;
@@ -6,7 +6,7 @@ import ohos.agp.components.Button;
 import ohos.agp.components.Component;
 import ohos.agp.render.Canvas;
 import ohos.app.Context;
-import com.github.nikartm.support.constant.Constants;
+import com.github.nikartm.stripedprocessbutton.constant.Constants;
 
 /**
  * Striped process button.

@@ -1,4 +1,4 @@
-package com.github.nikartm.support.constant;
+package com.github.nikartm.stripedprocessbutton.constant;
 
 import ohos.agp.utils.Color;
 

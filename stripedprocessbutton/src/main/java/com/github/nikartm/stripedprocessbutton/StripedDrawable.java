@@ -1,4 +1,4 @@
-package com.github.nikartm.support;
+package com.github.nikartm.stripedprocessbutton;
 
 import ohos.agp.text.Font;
 import ohos.agp.utils.Color;

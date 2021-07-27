@@ -24,16 +24,16 @@ Can observe both buttons clicked in the gif, they are set to true for stripe gra
 1.For using StripedProcessButton module in sample app, include the source code and add the below dependencies in entry/build.gradle to generate hap/support.har.
 ```groovy
 	dependencies {
-		implementation project(':support')
-        	implementation fileTree(dir: 'libs', include: ['*.har'])
-        	testCompile 'junit:junit:4.12'
+		implementation project(':stripedprocessbutton')
+        implementation fileTree(dir: 'libs', include: ['*.har'])
+        testImplementation 'junit:junit:4.13'
 	}
 ```
 2.For using StripedProcessButton in separate application using har file, add the har file in the entry/libs folder and add the dependencies in entry/build.gradle file.
 ```groovy
 	dependencies {
 		implementation fileTree(dir: 'libs', include: ['*.har'])
-		testCompile 'junit:junit:4.12'
+		testImplementation 'junit:junit:4.13'
 	}
 ```
 ## Usage

@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-package com.github.nikartm.stripedprocessbutton;
+package com.github.nikartm.stripedprocessbutton.sample;
 
-import ohos.aafwk.ability.AbilityPackage;
+import ohos.aafwk.ability.Ability;
+import ohos.aafwk.content.Intent;
+import com.github.nikartm.stripedprocessbutton.sample.slice.MainAbilitySlice;
 
 /**
- * MyApplication Class.
+ * MainAbility Class.
  */
-public class MyApplication extends AbilityPackage {
+public class MainAbility extends Ability {
     @Override
-    public void onInitialize() {
-        super.onInitialize();
+    public void onStart(Intent intent) {
+        super.onStart(intent);
+        super.setMainRoute(MainAbilitySlice.class.getName());
     }
 }

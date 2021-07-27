@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.github.nikartm.stripedprocessbutton.slice;
+package com.github.nikartm.stripedprocessbutton.sample.slice;
 
 import ohos.aafwk.ability.AbilitySlice;
 import ohos.aafwk.content.Intent;
 import ohos.agp.components.Button;
 import com.github.nikartm.stripedprocessbutton.ResourceTable;
-import com.github.nikartm.support.StripedProcessButton;
+import com.github.nikartm.stripedprocessbutton.StripedProcessButton;
 
 /**
  * MainAbilitySlice.

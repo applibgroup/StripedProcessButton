@@ -1,3 +1,5 @@
+# This workflow will build a Harmony OS project with Gradle and analyse the code using Sonar cloud.
+
 on:
   push:
     branches: [ master ]
