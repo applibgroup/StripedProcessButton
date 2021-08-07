@@ -45,7 +45,7 @@ public class StripedProcessButton extends Button implements Component.BindStateC
         mAnimatedDrawable = new AnimatedStripedDrawable(mStripedDrawable);
         mAnimatedDrawable.setComponent(this);
         setBindStateChangedListener(this);
-        addDrawTask(this:: onDraw);
+        addDrawTask(this:: onDraw, BETWEEN_BACKGROUND_AND_CONTENT);
     }
 
     /**
