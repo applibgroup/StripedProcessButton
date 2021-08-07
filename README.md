@@ -39,7 +39,7 @@ Can observe both buttons clicked in the gif, they are set to true for stripe gra
 3. For using StripedProcessButton from a remote repository in separate application, add the below dependencies in entry/build.gradle file.
 ```groovy
         dependencies {
-	        implementation 'dev.applibgroup:stripedprocessbutton:1.0.1'
+	        implementation 'dev.applibgroup:stripedprocessbutton:1.0.2'
 	        testCompile 'junit:junit:4.13'
         }
 ```
